@@ -12,7 +12,7 @@ class UCameraComponent;
 class AFPSProjectile;
 class USoundBase;
 class UAnimSequence;
-
+class UPawnNoiseEmitterComponent;
 
 UCLASS()
 class AFPSCharacter : public ACharacter
@@ -70,6 +70,10 @@ public:
 
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return CameraComponent; }
+
+private:
+	UPROPERTY(VisibleAnywhere, Category = "AI")
+	UPawnNoiseEmitterComponent* NoiseEmitterComp;
 
 };
 
