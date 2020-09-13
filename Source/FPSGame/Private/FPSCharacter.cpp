@@ -31,6 +31,20 @@ AFPSCharacter::AFPSCharacter()
 	NoiseEmitterComp = CreateDefaultSubobject<UPawnNoiseEmitterComponent>(TEXT("NoiseEmitterComp"));
 }
 
+
+void AFPSCharacter::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	// If Network controlled
+	if (!IsLocallyControlled())
+	{
+		FRotator NewRotation = CameraComponent->GetRelativeRotation();
+		NewRotation.Pitch = RemoteViewPitch * 360.f / 255.f;
+		CameraComponent->SetRelativeRotation(NewRotation);
+	}
+}
+
 void AFPSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	// set up gameplay key bindings
